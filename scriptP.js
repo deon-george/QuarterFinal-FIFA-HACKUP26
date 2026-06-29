@@ -198,4 +198,45 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(err => console.error(err));
     });
+
+    // 5. Live Chat Input
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    
+    if (chatInput && sendBtn) {
+        sendBtn.addEventListener('click', () => {
+            if (!currentUser) {
+                if(authModal) authModal.style.display = 'flex';
+                else alert("Please login first.");
+                return;
+            }
+            if (chatInput.value.trim() !== '') {
+                const newComment = {
+                    name: currentUser,
+                    text: chatInput.value.trim(),
+                    time: 'Just now',
+                    avatar: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(currentUser) + '&background=random'
+                };
+                
+                const commentEl = createCommentElement(newComment);
+                commentEl.style.opacity = '0';
+                commentEl.style.transform = 'translateY(-10px)';
+                commentsList.prepend(commentEl);
+                
+                setTimeout(() => {
+                    commentEl.style.transition = 'all 0.3s ease';
+                    commentEl.style.opacity = '1';
+                    commentEl.style.transform = 'translateY(0)';
+                }, 50);
+                
+                chatInput.value = '';
+            }
+        });
+
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendBtn.click();
+            }
+        });
+    }
 });

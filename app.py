@@ -25,7 +25,7 @@ init_db()
 
 @app.route('/')
 def index():
-    return send_from_directory('.', 'index.html')
+    return send_from_directory('.', 'indexP.html')
 
 @app.route('/api/signup', methods=['POST'])
 def signup():

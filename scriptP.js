@@ -95,6 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // 3.5 Legend Cards Click Handler
+    const legendCards = document.querySelectorAll('.legend-card');
+    legendCards.forEach(card => {
+        card.addEventListener('click', () => {
+            card.classList.toggle('active');
+        });
+    });
     // 4. Authentication logic
     let currentUser = null;
     let isSignupMode = false;

@@ -259,3 +259,76 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Toast Notification Function
+window.showToast = function(message) {
+    let toast = document.getElementById('custom-toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'custom-toast';
+        toast.className = 'toast-notification';
+        document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.classList.add('show');
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+};
+
+window.cartItems = [];
+
+window.addToCart = function(button) {
+    const card = button.closest('.jersey-card');
+    const name = card.querySelector('.jersey-info h5').textContent;
+    const priceText = card.querySelector('.price').textContent;
+    const size = card.querySelector('select').value;
+    const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+    
+    window.cartItems.push({name: name + ' (Size: ' + size + ')', price: price});
+    renderCart();
+    
+    showToast('Item added to cart!');
+    document.getElementById('cart-section').scrollIntoView({behavior: 'smooth'});
+};
+
+window.renderCart = function() {
+    const cartSummary = document.querySelector('.cart-summary');
+    if (window.cartItems.length === 0) {
+        cartSummary.innerHTML = '<h3>Cart Summary</h3><p>Your cart is currently empty.</p>';
+        return;
+    }
+    
+    let html = '<h3>Cart Summary</h3><ul style="list-style: none; padding: 0; margin-bottom: 15px;">';
+    let total = 0;
+    
+    window.cartItems.forEach((item, index) => {
+        html += '<li style="display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">' +
+                    '<span style="color: #333;">' + item.name + '</span>' +
+                    '<span style="color: #28a745; font-weight: 600;">₹ ' + item.price.toLocaleString('en-IN') + '</span>' +
+                 '</li>';
+        total += item.price;
+    });
+    
+    html += '</ul>';
+    html += '<div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem; color: #333; margin-top: 15px; border-top: 2px solid #ddd; padding-top: 10px;">' +
+                '<span>Total:</span>' +
+                '<span>₹ ' + total.toLocaleString('en-IN') + '</span>' +
+             '</div>';
+             
+    cartSummary.innerHTML = html;
+    
+    const badges = document.querySelectorAll('.badge');
+    badges.forEach(badge => {
+        badge.textContent = window.cartItems.length;
+    });
+};
+
+// Initialize badges on load
+document.addEventListener('DOMContentLoaded', () => {
+    const badges = document.querySelectorAll('.badge');
+    badges.forEach(badge => {
+        badge.textContent = '0';
+    });
+});

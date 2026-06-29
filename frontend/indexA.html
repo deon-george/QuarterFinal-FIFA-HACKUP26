@@ -41,9 +41,9 @@
                         <button id="logout-btn" class="btn btn-outline btn-sm">Logout</button>
                     </div>
                 </div>
-                <button class="icon-btn cart-btn">
+                <button class="icon-btn cart-btn" onclick="document.getElementById('cart-section').scrollIntoView({behavior: 'smooth'})">
                     <i class="fa-solid fa-cart-shopping"></i>
-                    <span class="badge">3</span>
+                    <span class="badge">0</span>
                 </button>
             </div>
         </header>
@@ -134,8 +134,7 @@
                                 <option>M</option>
                                 <option>L</option>
                             </select>
-                            <button class="btn btn-primary btn-sm"><i class="fa-solid fa-cart-shopping"></i> Add to
-                                Cart</button>
+                            <button class="btn btn-primary btn-sm" onclick="addToCart(this)"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
                         </div>
                     </div>
                     <div class="jersey-card">
@@ -152,8 +151,7 @@
                                 <option>M</option>
                                 <option>L</option>
                             </select>
-                            <button class="btn btn-primary btn-sm"><i class="fa-solid fa-cart-shopping"></i> Add to
-                                Cart</button>
+                            <button class="btn btn-primary btn-sm" onclick="addToCart(this)"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
                         </div>
                     </div>
                     <div class="jersey-card">
@@ -170,8 +168,7 @@
                                 <option>L</option>
                                 <option>XL</option>
                             </select>
-                            <button class="btn btn-primary btn-sm"><i class="fa-solid fa-cart-shopping"></i> Add to
-                                Cart</button>
+                            <button class="btn btn-primary btn-sm" onclick="addToCart(this)"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -201,6 +198,45 @@
                 <div class="prediction-result">Your Prediction: <span id="current-prediction">2 - 1</span></div>
             </section>
         </main>
+
+        <!-- Cart Section -->
+        <section class="cart-section" id="cart-section">
+            <div class="cart-header">
+                <h2>PLACE YOUR ORDER</h2>
+                <div class="underline"></div>
+            </div>
+            
+            <div class="cart-container">
+                <!-- Cart Summary -->
+                <div class="cart-summary">
+                    <h3>Cart Summary</h3>
+                    <p>Your cart is currently empty.</p>
+                </div>
+
+                <!-- Shipping & Payment -->
+                <div class="shipping-payment">
+                    <h3>Shipping & Payment</h3>
+                    <div class="order-details">
+                        <p><strong>Order ID:</strong> <span class="order-id">ORD-532585</span></p>
+                        <p><strong>Est. Delivery:</strong> <span class="est-delivery">Sat, Jul 4, 2026</span></p>
+                    </div>
+                    
+                    <form class="checkout-form" onsubmit="event.preventDefault(); showToast('Order placed successfully!');">
+                        <input type="text" placeholder="Full Name" required>
+                        <input type="email" placeholder="Email Address" required>
+                        <textarea placeholder="Shipping Address" rows="3" required></textarea>
+                        <select required>
+                            <option value="" disabled selected>Select Payment Mode</option>
+                            <option value="card">Credit/Debit Card</option>
+                            <option value="upi">UPI</option>
+                            <option value="cod">Cash on Delivery</option>
+                        </select>
+                        <button type="submit" class="btn btn-success btn-full">Confirm Order</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
 
         <!-- Footer -->
         <footer class="footer">

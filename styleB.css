@@ -217,13 +217,35 @@ section > h4 i {
 /* Banner Section */
 .banner-section {
     grid-area: banner;
-    background: linear-gradient(to right, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.4) 60%), url('https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/1200px-Flag_of_Brazil.svg.png') center/cover;
+    background: #0a0a0a;
     border-radius: 20px;
     padding: 50px 40px;
     border: 1px solid var(--card-border);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 40px rgba(242, 206, 12, 0.1);
+    box-shadow: 0 0 40px rgba(242, 206, 12, 0.2);
+}
+
+.hero-video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.85) 35%, rgba(0, 0, 0, 0.35) 100%);
+    z-index: 1;
+    pointer-events: none;
 }
 
 .banner-section::after {
@@ -233,9 +255,10 @@ section > h4 i {
     left: 0;
     right: 0;
     bottom: 0;
-    box-shadow: inset 0 0 50px rgba(242, 206, 12, 0.1);
+    box-shadow: inset 0 0 50px rgba(242, 206, 12, 0.3);
     pointer-events: none;
     border-radius: 20px;
+    z-index: 2;
 }
 
 .banner-content {
